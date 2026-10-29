@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="referrer" content="no-referrer">
+  <meta name="theme-color" content="#0f172a">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="출퇴근">
+  <title>출퇴근 도착정보 | 명지 ↔ 서면</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%232563eb'/%3E%3Cpath d='M18 14h28a6 6 0 0 1 6 6v20a6 6 0 0 1-6 6H18a6 6 0 0 1-6-6V20a6 6 0 0 1 6-6zm0 6v10h28V20zM20 38a3 3 0 1 0 0 .1zm24 0a3 3 0 1 0 0 .1zM20 48h6l-3 6zm18 0h6l3 6z' fill='white'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="top">
+    <div class="top-row">
+      <span id="dirBadge" class="dir-badge">출근</span>
+      <span id="dayBadge" class="day-badge" role="button" tabindex="0" title="눌러서 평일/토요일/휴일 시간표 변경">평일</span>
+      <span class="spacer"></span>
+      <button id="refreshBtn" class="icon-btn" aria-label="새로고침">↻</button>
+      <button id="settingsBtn" class="icon-btn" aria-label="설정">⚙</button>
+    </div>
+    <div class="route">
+      <div class="place" id="fromPlace">명지 더샵퍼스트월드2단지</div>
+      <button id="swapBtn" class="swap-btn" aria-label="출발지/도착지 바꾸기">⇅<span>바꾸기</span></button>
+      <div class="place" id="toPlace">서면역 12번출구</div>
+    </div>
+    <div class="status" id="status">불러오는 중…</div>
+  </header>
+
+  <main id="main"></main>
+
+  <section id="setup" class="card setup" hidden>
+    <h2>처음 한 번만 설정</h2>
+    <p>버스 실시간 정보를 받으려면 공공데이터포털 인증키가 필요해요. 키는 <b>이 기기 브라우저에만</b> 저장되고, GitHub나 다른 곳으로 보내지지 않아요.</p>
+    <ol>
+      <li><a href="https://www.data.go.kr/iim/api/selectAcountList.do" target="_blank" rel="noopener">data.go.kr 마이페이지 → 활용신청 현황</a>에서 <b>부산광역시_부산버스정보시스템</b>을 누르세요.</li>
+      <li><b>일반 인증키</b>를 복사해서 아래에 붙여넣으세요.</li>
+    </ol>
+    <input id="keyInput" type="password" autocomplete="off" spellcheck="false" placeholder="일반 인증키 붙여넣기">
+    <div class="row">
+      <button id="saveKeyBtn" class="primary">저장</button>
+      <button id="showKeyBtn">보기</button>
+    </div>
+    <div id="keyExtra" hidden>
+      <hr>
+      <p class="small">다른 기기(휴대폰 등)에서 바로 쓰려면, 키가 포함된 설정 링크를 만들어 <b>나에게만</b> 보내세요. 링크를 한 번 열면 그 기기에 키가 저장되고 주소창에서 키는 지워져요. 남과 공유하지 마세요.</p>
+      <div class="row">
+        <button id="copyLinkBtn">설정 링크 복사</button>
+        <button id="deleteKeyBtn" class="danger">이 기기에서 키 삭제</button>
+        <button id="closeSetupBtn">닫기</button>
+      </div>
+    </div>
+    <p id="setupMsg" class="small"></p>
+  </section>
+
+  <footer class="foot">
+    <p>버스: 부산광역시 부산버스정보시스템(실시간) · 지하철: 부산교통공사 열차시각표(표준 시각, 실제와 다를 수 있음)</p>
+    <p id="ttInfo"></p>
+  </footer>
+
+  <script src="config.js"></script>
+  <script src="timetable.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
